@@ -19,15 +19,25 @@ Point s4 = {-1,4};
 
 Point topbarArray[64] = {s1, s2, s3, s4};  
 
+boolean showcursor = false;
 
+int notex = 0;
+ 
+int notey = 0;
+
+int cursorx = 3;
+
+int cursory = 3;
 
 int score = 1; 
 
 int marker = 4; 
 
-int tempo = 188;
+int tempo = 200;
 
 int bar = 1;
+
+int Choice =3;
 
 int preset = 1;
 
@@ -36,7 +46,7 @@ void setup()
   MeggyJrSimpleSetup();   
   Serial.begin(9600);
   
-  
+
 }
 
 
@@ -51,9 +61,9 @@ void drawtopbar()
     DrawPx(topbarArray[i].x, topbarArray[i].y,Dark);
   }
   DrawPx(topbarArray[0].x, topbarArray[0].y, Green);
+ 
+  
 }
-
-
 
 
 
@@ -64,7 +74,6 @@ void loop()
   
   DisplaySlate();
   delay(tempo);
-  ClearSlate();
 
   
   
@@ -72,14 +81,46 @@ void loop()
  
 
   if (Button_A)
-  
-       score++;  
+  {
+    if (Choice % 2 > 0)
+       score++; 
+       
+    if (Choice %2 == 0)
+    showcursor= true;
+    
+    
+    } 
   
   if (Button_B)
   
-       tempo+5;  
+       Choice++;  
     
     
+  if (Button_Up)
+  {
+   cursory++;
+   showcursor= false;
+    DrawPx(cursorx,cursory-1,Dark);
+  }
+
+  if (Button_Right)
+  {
+   cursorx++;
+   showcursor= false;  
+   DrawPx(cursorx-1,cursory,Dark); 
+  }
+  if (Button_Down)
+  {
+   cursory--;
+   showcursor= false; 
+  DrawPx(cursorx,cursory+1,Dark); 
+  }
+  if (Button_Left)
+  {
+   cursorx--;
+   showcursor= false;   
+   DrawPx(cursorx+1,cursory,Dark);
+  }  
   
   
   if (score % 2 == 0)
@@ -175,11 +216,35 @@ if (ReadPx(topbarArray[3].x,topbarArray[3].y) == Red)
   Tone_Start(ToneDs3,70);
 
 
+if (Choice % 2 == 0)
 
- }
+{
+  DrawPx(cursorx,cursory,Blue);
+  DisplaySlate();
+  
+
+
+}
 
 
 
+if (showcursor == true)
+{
+   notex = cursorx;
+   notey = cursory;
+  DrawPx(notex,notey-1,Red);
+  DisplaySlate();
+  
+}
+
+if (showcursor == false)
+{
+  notex != cursorx;
+   notey != cursory;
+   DrawPx(notex,notey-1,Red);
+  DisplaySlate();
+}
+}
 
 
 
