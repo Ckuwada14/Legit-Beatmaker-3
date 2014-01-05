@@ -58,7 +58,7 @@ void drawtopbar()
 {
   for (int i = 0; i < marker; i++)
   {
-    DrawPx(topbarArray[i].x, topbarArray[i].y,Dark);
+    DrawPx(topbarArray[i].x, topbarArray[i].y,Green);
   }
   DrawPx(topbarArray[0].x, topbarArray[0].y, Green);
  
@@ -73,6 +73,7 @@ void loop()
 
   
   DisplaySlate();
+  
   delay(tempo);
 
   
@@ -92,9 +93,12 @@ void loop()
     } 
   
   if (Button_B)
+ { 
+  if  (score % 2 == 0)
+  {
   
        Choice++;  
-    
+  } 
     
   if (Button_Up)
   {
@@ -129,6 +133,7 @@ void loop()
     topbarArray[1].x++;
     topbarArray[2].x++;
     topbarArray[3].x++;
+    ClearSlate();
     
  }
   
@@ -202,18 +207,6 @@ if (preset == 1)
 
 DisplaySlate();
 
-if (ReadPx(topbarArray[1].x,topbarArray[1].y) == Red)   
-  
-
-   Tone_Start(ToneDs6,40); 
-  
-if (ReadPx(topbarArray[2].x,topbarArray[2].y) == Red)  
-
-  Tone_Start(ToneDs9,40);
-
-if (ReadPx(topbarArray[3].x,topbarArray[3].y) == Red)  
-
-  Tone_Start(ToneDs3,70);
 
 
 if (Choice % 2 == 0)
@@ -222,10 +215,11 @@ if (Choice % 2 == 0)
   DrawPx(cursorx,cursory,Blue);
   DisplaySlate();
   
-
-
 }
 
+if (Choice % 2 > 0)
+ 
+ DrawPx(cursorx,cursory,Dark);
 
 
 if (showcursor == true)
@@ -243,6 +237,21 @@ if (showcursor == false)
    notey != cursory;
    DrawPx(notex,notey-1,Red);
   DisplaySlate();
+  
+  
+  if (ReadPx(topbarArray[1].x,topbarArray[1].y) == Red)   
+  
+
+   Tone_Start(ToneDs5,30); 
+  
+if (ReadPx(topbarArray[2].x,topbarArray[2].y) == Red)  
+
+  Tone_Start(ToneDs9,40);
+
+if (ReadPx(topbarArray[3].x,topbarArray[3].y) == Red)  
+
+  Tone_Start(ToneB2,70);
+
 }
 }
 
