@@ -58,7 +58,7 @@ void drawtopbar()
 {
   for (int i = 0; i < marker; i++)
   {
-    DrawPx(topbarArray[i].x, topbarArray[i].y,Green);
+    
   }
   DrawPx(topbarArray[0].x, topbarArray[0].y, Green);
  
@@ -84,18 +84,21 @@ void loop()
   if (Button_A)
   {
     if (Choice % 2 > 0)
+     {  
        score++; 
+       showcursor= false;
+
+     }
        
     if (Choice %2 == 0)
     showcursor= true;
     
     
-    } 
+  }
   
   if (Button_B)
  { 
-  if  (score % 2 == 0)
-  {
+  
   
        Choice++;  
   } 
@@ -130,10 +133,9 @@ void loop()
   if (score % 2 == 0)
  {
     topbarArray[0].x++;
-    topbarArray[1].x++;
-    topbarArray[2].x++;
-    topbarArray[3].x++;
-    ClearSlate();
+    DrawPx(topbarArray[0].x-1,topbarArray[0].y,Dark);
+    
+   
     
  }
   
@@ -147,9 +149,7 @@ void loop()
  {
  bar ++;
   topbarArray[0].x = 0;
-    topbarArray[1].x = 0;
-    topbarArray[2].x = 0;
-    topbarArray[3].x = 0;
+ 
  }
  
 if (bar % 2 == 0)
@@ -158,9 +158,6 @@ if (bar % 2 == 0)
 
  
     topbarArray[0].y = 3;
-    topbarArray[1].y = 2;
-    topbarArray[2].y = 1;
-    topbarArray[3].y = 0;
     
  }
  
@@ -170,9 +167,7 @@ if (bar % 2 == 0)
 
  
     topbarArray[0].y = 7;
-    topbarArray[1].y = 6;
-    topbarArray[2].y = 5;
-    topbarArray[3].y = 4;
+  
     
  }
  
@@ -181,19 +176,15 @@ if (bar % 2 == 0)
   {
     bar = 1;
     topbarArray[0].x = -1;
-    topbarArray[1].x = -1;
-    topbarArray[2].x = -1;
-    topbarArray[3].x = -1;
+   
     
     topbarArray[0].y = 7;
-    topbarArray[1].y = 6;
-    topbarArray[2].y = 5;
-    topbarArray[3].y = 4;
+   
      
   }
 
 if (preset == 1)
-{
+
   DrawPx(0,4,Red);
   DrawPx(3,4,Red);
   DrawPx(5,4,Red);
@@ -202,7 +193,7 @@ if (preset == 1)
   DrawPx(7,6,Red);
   DrawPx(2,5,Red);
   DrawPx(6,5,Red);
-}
+
 
 
 DisplaySlate();
@@ -218,8 +209,13 @@ if (Choice % 2 == 0)
 }
 
 if (Choice % 2 > 0)
- 
- DrawPx(cursorx,cursory,Dark);
+
+{
+  
+  DrawPx(cursorx,cursory,Dark);
+  DisplaySlate();
+  
+}
 
 
 if (showcursor == true)
@@ -239,27 +235,63 @@ if (showcursor == false)
   DisplaySlate();
   
   
-  if (ReadPx(topbarArray[1].x,topbarArray[1].y) == Red)   
+  if (ReadPx(topbarArray[0].x,6) == Red)   
   
+  {
+    if (topbarArray[0].y == 7) 
 
    Tone_Start(ToneDs5,30); 
+  }
   
-if (ReadPx(topbarArray[2].x,topbarArray[2].y) == Red)  
+if (ReadPx(topbarArray[0].x,5) == Red)  
+
+  {
+    
+    if (topbarArray[0].y == 7) 
 
   Tone_Start(ToneDs9,40);
+  }
 
-if (ReadPx(topbarArray[3].x,topbarArray[3].y) == Red)  
+if (ReadPx(topbarArray[0].x,4) == Red)  
+
+ {
+   
+    if (topbarArray[0].y == 7) 
+
+  Tone_Start(ToneB2,70);
+
+}
+ 
+  if (ReadPx(topbarArray[0].x,2) == Red)   
+  
+  {
+    if (topbarArray[0].y == 3) 
+
+   Tone_Start(ToneDs5,30); 
+  }
+  
+if (ReadPx(topbarArray[0].x,1) == Red)  
+
+  {
+    
+    if (topbarArray[0].y == 3) 
+
+  Tone_Start(ToneDs9,40);
+  }
+
+if (ReadPx(topbarArray[0].x,0) == Red)  
+
+ {
+   
+    if (topbarArray[0].y == 3) 
 
   Tone_Start(ToneB2,70);
 
 }
 }
+}
 
-
-
-
-
-
+ 
 
 
 
