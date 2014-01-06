@@ -1,6 +1,18 @@
 //Cameron Kuwada
 #include <MeggyJrSimple.h>   
 
+
+//instructions: When turned on, screen will be blank. Press A to play loop. 
+//Press B once, to bring up a cursor, this switches the game to setup mode
+//Move the cursor around and press A to place dots.
+//THen press B again to switch back to play mode.
+//In play mode, left and right adjust tempo.
+
+
+
+
+
+
 struct Point
 {
   int x;
@@ -25,9 +37,9 @@ int notex = 0;
  
 int notey = 0;
 
-int cursorx = 3;
+int cursorx = 4;
 
-int cursory = 3;
+int cursory = 4;
 
 int score = 1; 
 
@@ -39,14 +51,19 @@ int bar = 1;
 
 int Choice =3;
 
-int preset = 1;
 
 void setup()                    
 {
   MeggyJrSimpleSetup();   
   Serial.begin(9600);
   
-
+for (int i = 0; i < 8; i++)
+  DrawPx(i,7,Yellow);
+  
+for (int i = 0; i < 8; i++)
+  DrawPx(i,3,Yellow);
+  
+ 
 }
 
 
@@ -105,6 +122,7 @@ void loop()
     
   if (Button_Up)
   {
+    
    cursory++;
    showcursor= false;
     DrawPx(cursorx,cursory-1,Dark);
@@ -112,6 +130,10 @@ void loop()
 
   if (Button_Right)
   {
+     if (Choice % 2 > 0)
+    tempo-=20;
+   if (Choice % 2 == 0)  
+   
    cursorx++;
    showcursor= false;  
    DrawPx(cursorx-1,cursory,Dark); 
@@ -124,6 +146,9 @@ void loop()
   }
   if (Button_Left)
   {
+    if (Choice % 2 > 0)
+    tempo+=20;
+   if (Choice % 2 == 0)  
    cursorx--;
    showcursor= false;   
    DrawPx(cursorx+1,cursory,Dark);
@@ -133,7 +158,7 @@ void loop()
   if (score % 2 == 0)
  {
     topbarArray[0].x++;
-    DrawPx(topbarArray[0].x-1,topbarArray[0].y,Dark);
+    DrawPx(topbarArray[0].x-1,topbarArray[0].y,Yellow);
     
    
     
@@ -182,17 +207,6 @@ if (bar % 2 == 0)
    
      
   }
-
-if (preset == 1)
-
-  DrawPx(0,4,Red);
-  DrawPx(3,4,Red);
-  DrawPx(5,4,Red);
-  DrawPx(1,6,Red);
-  DrawPx(4,6,Red);
-  DrawPx(7,6,Red);
-  DrawPx(2,5,Red);
-  DrawPx(6,5,Red);
 
 
 
